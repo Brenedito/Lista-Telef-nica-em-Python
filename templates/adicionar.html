@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Adicionar Número</title>
+</head>
+<body class=" h-screen w-screen flex justify-center items-center bg-slate-500 p-5 flex-col">
+    <a class="bg-red-500 p-2 text-white font-bold rounded m-2" href="/adicionar"><Button >Voltar</Button></a>
+    <form class="gap-y-6 flex flex-col h-1/2 w-full sm:w-1/3 md:w-1/4 lg:w-1/5 items-center justify-center p-5 bg-white rounded-xl" action="/adicionando" method="post">
+        <div>
+            <p>Digite o Nome</p>
+            <input required name="nome" type="text" class="p-1 bg-slate-300 border-solid rounded-lg w-full">
+        </div>
+        <div>
+            <p>Digite o Número com DDD</p>
+            <input required name="numero" id="telefone" type="text" class="p-1 bg-slate-300 border-solid rounded-lg w-full">
+        </div>
+        <div>
+            <p>Digite a cidade</p>
+            <input required name="cidade" type="text" class="p-1 bg-slate-300 border-solid rounded-lg w-full">
+        </div>
+        <button class="bg-green-500 p-2 text-white font-bold rounded m-2" type="submit">Adicionar</button>
+    </form>
+    <script>
+        // Função para formatar o número de telefone
+        function formatarTelefone(input) {
+            let telefone = input.value.replace(/\D/g, ''); // Remove tudo que não for número
+            if (telefone.length <= 2) {
+                input.value = '(' + telefone;
+            } else if (telefone.length <= 6) {
+                input.value = '(' + telefone.substring(0, 2) + ') ' + telefone.substring(2);
+            } else {
+                input.value = '(' + telefone.substring(0, 2) + ') ' + telefone.substring(2, 7) + '-' + telefone.substring(7, 11);
+            }
+        }
+        // Adicionando Evento para formatar enquanto o usuário digita
+        document.getElementById('telefone').addEventListener('input', function () {
+            formatarTelefone(this);
+        });
+    </script>
+</body>
+</html>
